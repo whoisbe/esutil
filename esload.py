@@ -6,12 +6,16 @@ from elasticsearch import Elasticsearch
 from elasticsearch.helpers import bulk
 from dateutil.parser import parse as dateparse
 from datetime import datetime, timezone, timedelta
-
+import sys
 from dotenv import load_dotenv
 import os
 
 # Load configurations .env file
 load_dotenv()
+
+if not os.environ.get("ELASTICSEARCH_URL") and not os.environ.get("ELASTIC_CLOUD_ID"):
+   print("Please provide ELASTICSEARCH_URL or ELASTIC_CLOUD_ID in the environment")
+   sys.exit(1)
 
 
 # Initialize Elasticsearch client
